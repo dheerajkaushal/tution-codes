@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+
+        let dotCount=0;
+        let operatorCount=0;
+        //function calculation(event)
+        //{
+//
+        //}
+
+        function calculate(index)
+        {
+            let textObj=document.getElementById("textID");
+            let buttObj=document.getElementsByClassName("innerButt");
+            let name=textObj.value;
+            textObj.focus();
+           
+            if(index==0) textObj.value="0";
+            else if(index==2)
+            {   
+                textObj.value= name.slice(0,(name.length-1));
+                if(name.length==1) textObj.value="0";
+            }
+            else if(index==19)
+            {
+
+            }
+            else 
+            {
+                switch(index)
+                {
+                    case 1:
+                        if(operatorCount==1)
+                        {
+                            textObj.value += buttObj[index].textContent;
+                        }
+                        break;
+
+                    case 3: 
+                        break;
+
+                    case 7:
+                        break;
+
+                    case 11:
+                        break;
+
+                    case 15:
+                        break;
+                      
+                    case 16: 
+                        break;
+                        
+                    case 18: 
+                        if(dotCount==1) return;
+                        textObj.value+=".";
+                        dotCount=1;
+                        break;
+
+                    default:
+                        if(textObj.value.length==1 && textObj.value=="0") textObj.value="";
+                        textObj.value+=buttObj[index].textContent;
+                        operatorCount=1;
+                        //console.log(textObj.value);
+                       // textObj.value = textObj.value+buttObj[index].textContent;
+                        break;              
+                }
+
+            }
+        }
+    </script>
+
+    <style>
+        .container{
+            display: inline-grid;
+            grid-template-rows: 0.4fr 0.8fr;
+            grid-template-columns: 0.1fr 0.1fr 0.1fr 0.1fr;
+            grid-template-areas: 
+            "fir fir fir fir"
+            "sec sec sec sec"
+            "thir thir thir thir";
+            height: 530px;
+            column-gap: 5px;
+            row-gap: 10px;
+            background-color: rgb(18,18,20);
+            border:none;
+            border-radius: 15px;
+        }
+        .innerButt{
+            width: 80px;
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            background-color:rgb(58,60,63);
+            box-shadow: 0px 6px 12px rgba(0,0,0,0.7),inset 0px 4px 5px rgba(255,255,255,0.3);
+            border-radius: 50px;
+            color: white;
+        }
+        .innerDiv button:hover{
+            box-shadow: inset 5px 5px 4px rgba(255,255,255,0.3),
+                    inset -5px -5px 4px rgba(255,255,255,0.3);
+        }
+         
+        #acButt{
+            margin-left: 5px;
+        }
+        #sevenButt{
+            margin-left: 5px;
+        }
+        #fourButt{
+            margin-left: 5px;
+        }
+        #oneButt{
+            margin-left: 5px;
+        }
+        #doubleZeroButt{
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+        #divButt{
+            margin-right: 5px;
+        }
+        #multiButt{
+            margin-right: 5px;
+        }
+        #minusButt{
+            margin-right: 5px;
+        }
+        #addButt{
+            margin-right: 5px;
+        }
+        #equalButt{
+            background-color: rgb(255,159,67);
+            margin-right: 5px;
+        }
+        #title{
+            grid-area: fir;
+            display:flex;
+            justify-content: space-around;
+        }
+        #textField{
+            grid-area: sec;
+            width: 100%;
+            height: 90%;
+            ::-webkit-inner-spin-button{
+                appearance: none;
+            }
+        }
+        #innerText{
+            width: 90%;
+            text-align: start;
+            margin: 5px 0px 0px 15px;
+        }
+        #resultID
+        {
+           background-color:rgb(58,60,63);
+            color:white;
+            font-size: 20px;
+        }
+        #textID{
+            width: 90%;
+            height: 80%;
+            background-color:rgb(58,60,63);
+            color:white;
+            font-size: 30px;
+        }
+        body{
+            text-align: center;    
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainDiv">
+        <div id="title">
+            <div>!</div>
+            <div>
+                <label>=</label>
+                <label>[ ]</label>
+                <label>:</label>
+            </div>
+        </div>
+        <div id="textField"><input id="textID" type="text"  value="0">
+                <div id="innerText"><label id="resultID"></label></div>  
+        </div>
+        <div class="innerDiv"><button onclick="calculate(0)"  class="innerButt" id="acButt">AC</button></div>         
+        <div class="innerDiv"><button onclick="calculate(1)"  class="innerButt" id="perBut">%</button></div>         
+        <div class="innerDiv"><button onclick="calculate(2)"  class="innerButt" id="backButt"><=</button></div>         
+        <div class="innerDiv"><button onclick="calculate(3)"  class="innerButt" id="divButt">/</button></div>
+        <div class="innerDiv"><button onclick="calculate(4)"  class="innerButt" id="sevenButt">7</button></div>
+        <div class="innerDiv"><button onclick="calculate(5)"  class="innerButt" id="eightButt">8</button></div>
+        <div class="innerDiv"><button onclick="calculate(6)"  class="innerButt" id="nineButt">9</button></div>
+        <div class="innerDiv"><button onclick="calculate(7)"  class="innerButt" id="multiButt">*</button></div>
+        <div class="innerDiv"><button onclick="calculate(8)"  class="innerButt" id="fourButt">4</button></div>
+        <div class="innerDiv"><button onclick="calculate(9)"  class="innerButt" id="fiveButt">5</button></div>
+        <div class="innerDiv"><button onclick="calculate(10)" class="innerButt" id="sixButt">6</button></div>
+        <div class="innerDiv"><button onclick="calculate(11)" class="innerButt" id="minusButt">-</button></div>
+        <div class="innerDiv"><button onclick="calculate(12)" class="innerButt" id="oneButt">1</button></div>
+        <div class="innerDiv"><button onclick="calculate(13)" class="innerButt" id="twoButt">2</button></div>
+        <div class="innerDiv"><button onclick="calculate(14)" class="innerButt" id="threeButt">3</button></div>
+        <div class="innerDiv"><button onclick="calculate(15)" class="innerButt" id="addButt">+</button></div>
+        <div class="innerDiv"><button onclick="calculate(16)" class="innerButt" id="doubleZeroButt">^</button></div>
+        <div class="innerDiv"><button onclick="calculate(17)" class="innerButt" id="zeroButt">0</button></div>
+        <div class="innerDiv"><button onclick="calculate(18)" class="innerButt" id="dotButt">.</button></div>
+        <div class="innerDiv"><button onclick="calculate(19)" class="innerButt" id="equalButt">=</button></div>
+    </div>
+</body>
+</html>
+
+
+ <!-- 
+    box-shadow: 0px 2px 4px rgba(255,255,255,0.3); 
+    input[type="number"]::-webkit-inner-button-spinner{
+    -webkit-apperance:none;
+            OR
+        apperance:none;
+    }
+    text-shadow: 4px 4px 3px blue;
+
+      document.addEventListener('keydown',function(keyPress){
+            console.log("key Pressed:",keyPress.key);            
+            console.log("Physical key:",keyPress.code);
+        }) 
+     document.addEventListener('click', calculation());    
+
+    onfocus=> event 
+      function divFocus()
+        {
+            let textObj= document.getElementById("textID");
+            textObj.focus();
+        } 
+    function calculation() {
+        let textObj = document.getElementById("textID");
+        if (textObj.value === "") textObj.style.caretColor = "transparent";
+        else textObj.style.caretColor = "white";
+    } 
+        
+     caret-color: transparent; 
+-->

@@ -1,0 +1,37 @@
+
+<!--CSS align-items Property
+The align-items property is used to align the flex items when they do not use all available space on the cross-axis (vertically).-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            height:300px;
+            align-items:center;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: DodgerBlue;
+        }
+        .container div {
+            background-color: #f1f1f1;
+            width: 100px;
+            margin: 10px;
+            padding: 30px;
+            text-align: center;  
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>justify-content: center</h1>
+    <div class="container">
+        <div>India</div>
+        <div>Australia</div>
+        <div>England</div>  
+    </div>
+</body>
+</html>

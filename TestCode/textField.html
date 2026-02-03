@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        let textLength = 0;
+        function calculate(event)
+        {
+            let textObj=document.getElementById("textID");
+            textLength++;
+            //textObj.value='';
+            //console.log(event.key);
+            if(event.key=="a")
+            {
+                console.log(textLength);
+                if(textLength==1){
+                    textObj.value = '';
+                    console.log(textLength);
+                }
+                else{ 
+                    console.log("Before Slice:"+textObj.value);
+                    textObj.value=textObj.value.replace(event.key,'');
+                    //textObj.value=textObj.value.slice(0,(textObj.value.length-1));
+                    console.log("After Slice:" + textObj.value);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="height: 80%; width:80%;">
+        <input onkeydown="calculate(event)" id="textID" type="text" value="" style="height:70%; width:60%;">
+
+    </div>
+    <div>
+        <label id="textIDSec"></label>
+    </div>
+</body>
+</html>
