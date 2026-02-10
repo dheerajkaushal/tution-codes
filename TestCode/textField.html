@@ -6,36 +6,116 @@
     <title>Calculator</title>
     <script>
         let textLength = 0;
-        function calculate(event)
-        {
-            let textObj=document.getElementById("textID");
-            textLength++;
-            //textObj.value='';
+        let arthOperator=0;
+        let dotCount=0;
+        let firstOperatorPos=0;
+        let tempVar=0;
+        let secondOperatorPos=0;
+        let previousOperator;
+
+        document.addEventListener('keydown',function(event){
+
+            let labelObj=document.getElementById("textIDSec");
+            let resultObj=document.getElementById("output");
             //console.log(event.key);
-            if(event.key=="a")
+            if(event.key>="0" && event.key<="9")
             {
-                console.log(textLength);
-                if(textLength==1){
-                    textObj.value = '';
-                    console.log(textLength);
-                }
-                else{ 
-                    console.log("Before Slice:"+textObj.value);
-                    textObj.value=textObj.value.replace(event.key,'');
-                    //textObj.value=textObj.value.slice(0,(textObj.value.length-1));
-                    console.log("After Slice:" + textObj.value);
+                if(textLength==0) labelObj.textContent="";
+                ++textLength;
+                arthOperator = 1;
+                labelObj.textContent+=event.key;
+            }
+            else if(event.key=="+"||event.key=="-"||event.key=="%"||event.key=="*"||event.key=="/")
+            {
+                if(arthOperator==0)return;
+                labelObj.textContent += event.key;
+                arthOperator = 0;
+                if(firstOperatorPos==0) {
+                    previousOperator=event.key;
+                    firstOperatorPos=++textLength;
+                }    
+                else
+                {
+                    for(let index=0;index<2;)
+                    {    
+                        switch(previousOperator)
+                        {
+                            case "+":
+                            tempVar = parseFloat(labelObj.textContent.slice(0, (firstOperatorPos))) + parseFloat(labelObj.textContent.slice(firstOperatorPos, (textLength)));
+                            break;
+
+                            case "-": 
+                            tempVar = parseFloat(labelObj.textContent.slice(0, (firstOperatorPos))) - parseFloat(labelObj.textContent.slice(firstOperatorPos, (textLength)));
+                            break;
+                        
+                            case "*":
+                            tempVar = parseFloat(labelObj.textContent.slice(0, (firstOperatorPos))) * parseFloat(labelObj.textContent.slice(firstOperatorPos, (textLength))); 
+                            break;
+
+                            case "%":
+                            tempVar = parseFloat(labelObj.textContent.slice(0, (firstOperatorPos))) % parseFloat(labelObj.textContent.slice(firstOperatorPos, (textLength))); 
+                            break;
+
+                            case "/":
+                            tempVar = parseFloat(labelObj.textContent.slice(0, (firstOperatorPos))) / parseFloat(labelObj.textContent.slice(firstOperatorPos, (textLength))); 
+                            break;
+                        }
+                        index++;
+                        previousOperator=event.key;
+                    }    
                 }
             }
-        }
+            else if(event.key=="Backspace")
+            {
+                labelObj.textContent=labelObj.textContent.slice(0,(textLength-1));
+                if(textLength==1)labelObj.textContent="0";
+                textLength--;
+            }
+            else if(event.key=="Enter")
+            {
+              //  if(tempVar==0)
+              //  {//
+                   // if(textLength==firstOperatorPos || firstOperatorPos==0) {
+                   //     resultObj.textContent="";
+                   //     return;
+                   // }    
+                   // tempVar=parseFloat(labelObj.textContent.slice(0,(firstOperatorPos))) + parseFloat(labelObj.textContent.slice(firstOperatorPos,(textLength)));
+                    resultObj.textContent=tempVar.toString();
+                    console.log(resultObj.textContent);
+               // }
+            }
+        })
     </script>
 </head>
 <body>
     <div style="height: 80%; width:80%;">
-        <input onkeydown="calculate(event)" id="textID" type="text" value="" style="height:70%; width:60%;">
+        <!-- <input onkeydown="calculate(event)" id="textID" type="text" value="" style="height:70%; width:60%;"> -->
 
     </div>
     <div>
-        <label id="textIDSec"></label>
+        <label id="textIDSec">0</label><br>
+        <label id="output"></label>
     </div>
 </body>
 </html>
+
+<!-- //function calculate(event)//{
+// let textObj=document.getElementById("textID");
+// textLength++;
+// //textObj.value='';
+// //console.log(event.key);
+// if(event.key=="a")
+// {
+// console.log(textLength);
+// if(textLength==1){
+// textObj.value = '';
+// console.log(textLength);
+// }
+// else{
+// console.log("Before Slice:"+textObj.value);
+// textObj.value=textObj.value.replace(event.key,'');
+// //textObj.value=textObj.value.slice(0,(textObj.value.length-1));
+// console.log("After Slice:" + textObj.value);
+// }
+// }
+//} -->
